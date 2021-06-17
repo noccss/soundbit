@@ -1,4 +1,4 @@
-# soundbit-application
+# soundbit-frontend
 
 ## Project setup
 ```
