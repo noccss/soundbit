@@ -1,11 +1,11 @@
 <template>
-  <div class="login_app">
-    <div class="login__header">
+  <div class="register_app">
+    <div class="register__header">
       <h1>Sound<span>Bit</span></h1>
     </div>
 
-    <div class="login__container">
-      <img src="../../assets/img/Auth/background_login.svg" />
+    <div class="register__container">
+      <img src="../../assets/img/Auth/background_register.svg" />
 
       <form>
         <h1>Bem vindo de volta ao SoundBit</h1>
@@ -15,7 +15,6 @@
           label="E-mail"
           required
           outlined
-          v-validate="'required|email'"
           name="email"
         ></v-text-field>
         <v-text-field
@@ -28,13 +27,23 @@
           outlined
           @click:append="showPassword = !showPassword"
         ></v-text-field>
+        <v-text-field
+          v-model="confirmPassword"
+          :append-icon="showConfirmPassowrd ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showConfirmPassowrd ? 'text' : 'password'"
+          :rules="[rules.required, rules.min]"
+          label="Confirm Password"
+          required
+          outlined
+          @click:append="showConfirmPassowrd = !showConfirmPassowrd"
+        ></v-text-field>
 
-        <v-btn class="ma-2" outlined large color="white"> Login </v-btn>
+        <v-btn class="ma-2" outlined large color="white"> Register </v-btn>
 
-        <router-link to="">Esqueceu sua senha?</router-link>
-        <p>
-          Não tem uma conta? <router-link to="/signup">Cadastre-se aqui!</router-link>
-        </p>
+        <router-link to="/login"
+          >Se já possui uma conta, clique aqui!</router-link
+        >
+        <p></p>
       </form>
     </div>
   </div>
@@ -42,12 +51,14 @@
 
 <script>
 export default {
-  name: "login",
+  name: "signup",
   data() {
     return {
       showPassword: false,
+      showConfirmPassowrd: false,
       email: "",
       password: "",
+      confirmPassword: "",
       rules: {
         required: (v) => !!v || "Required",
         min: (v) => v.length >= 8 || "Min 8 characteres",
@@ -61,7 +72,7 @@ export default {
 </script>
 
 <style scoped>
-.login_app {
+.register_app {
   display: flex;
   flex-direction: column;
 
@@ -71,7 +82,7 @@ export default {
   background-color: #f5f6fa;
 }
 
-.login__header {
+.register__header {
   color: #e85288;
   height: 120px;
   display: flex;
@@ -79,11 +90,11 @@ export default {
   margin: 0 60px;
 }
 
-.login__header span {
+.register__header span {
   color: #000;
 }
 
-.login__container {
+.register__container {
   display: flex;
 
   align-items: center;
@@ -93,11 +104,11 @@ export default {
   padding: 0 60px;
 }
 
-.login__container img {
+.register__container img {
   width: 50vw;
 }
 
-.login__container form {
+.register__container form {
   display: flex;
   flex-direction: column;
 
@@ -108,7 +119,7 @@ export default {
   text-align: center;
 }
 
-.login__container h1 {
+.register__container h1 {
   margin-bottom: 40px;
 }
 
@@ -125,7 +136,7 @@ export default {
   border-radius: 20px;
 }
 
-.login__container a {
+.register__container a {
   color: #e85288;
 
   font-weight: bold;
@@ -133,7 +144,7 @@ export default {
   text-decoration: none;
 }
 
-.login__container span {
+.register__container span {
   color: #000000;
   font-weight: bold;
 }
