@@ -25,6 +25,7 @@ var routes = [
 Vue.prototype.allRoutes = routes;
 
 const router = new Router({
+  mode: "history",
   routes: routes,
 });
 router.beforeEach((to, from, next) => {
