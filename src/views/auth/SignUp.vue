@@ -1,18 +1,18 @@
 <template>
-  <div class="login_app">
-    <div class="login__header">
+  <div class="register_app">
+    <div class="register__header">
       <h1>Sound<span>Bit</span></h1>
     </div>
 
-    <div class="login__container">
-      <img src="../../assets/img/Auth/background_login.svg" />
+    <div class="register__container">
+      <img src="../../assets/img/Auth/background_register.svg" />
 
       <v-form ref="form" @submit.prevent="handleSubmit">
-        <h1>Welcome back to <strong>Sound</strong>Bit</h1>
+        <h1>Welcome to <strong>Sound</strong>Bit</h1>
         <v-text-field
           v-model="email"
-          :rules="[rulesEmail.required, rulesEmail.email]"
           :append-icon="'mdi-email'"
+          :rules="[rulesEmail.required, rulesEmail.email]"
           label="E-mail"
           required
           outlined
@@ -28,16 +28,31 @@
           outlined
           @click:append="showPassword = !showPassword"
         ></v-text-field>
+        <v-text-field
+          v-model="confirmPassword"
+          :append-icon="showConfirmPassowrd ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showConfirmPassowrd ? 'text' : 'password'"
+          :rules="[rulesPassword.confirmPassword, rulesPassword.min]"
+          label="Confirm Password"
+          required
+          outlined
+          @click:append="showConfirmPassowrd = !showConfirmPassowrd"
+        ></v-text-field>
 
-        <v-btn class="ma-2 login___btnSubmit" type="submit" outlined large color="white">
-          Login
+        <v-checkbox
+          label="Do you agree with the Terms & Conditions?"
+          v-model="checkbox"
+          :rules="[rulesTerms]"
+          required
+        ></v-checkbox>
+
+        <v-btn class="ma-2 register___btnSubmit" outlined large color="white" type="submit">
+          Register
         </v-btn>
 
-        <router-link to="">Forgot your password?</router-link>
-        <p>
-          Don't have account?
-          <router-link to="/signup">Sign Up here!</router-link>
-        </p>
+        <router-link to="/login"
+          >Se já possui uma conta, clique aqui!</router-link
+        >
       </v-form>
 
       <v-snackbar v-model="snackbar.open" :color="snackbar.color">
@@ -57,21 +72,25 @@
 import axios from "axios";
 
 export default {
-  name: "login",
+  name: "signup",
   data() {
     return {
       showPassword: false,
-      email: "",
-      password: "",
+      showConfirmPassowrd: false,
       snackbar: {
         open: false,
         text: "",
         color: "",
         timeout: 0,
       },
+      email: "",
+      password: "",
+      confirmPassword: "",
+      checkbox: false,
       rulesPassword: {
         required: (v) => !!v || "Password is required",
         min: (v) => v.length >= 8 || "Min 8 characteres",
+        confirmPassword: (v) => !!v || "Confirm the password",
       },
       rulesEmail: {
         required: (v) => !!v || "Email is required",
@@ -79,19 +98,36 @@ export default {
           /.+@.+/.test(v) ||
           "Email precisa estar no formato example@example.com",
       },
+      rulesTerms: (v) => !!v || "You must agree to continue!",
     };
   },
   methods: {
     async handleSubmit() {
       try {
-        await axios.post("", {
-          email: this.email,
-          password: this.password,
-        });
+        if (this.$refs.form.validate() && this.validCredentials()) {
+          await axios.post("", {
+            email: this.email,
+            password: this.password,
+          });
+
+          this.$router.push("/login");
+        }
       } catch (err) {
         this.snackbar.open = true;
         this.snackbar.color = "red";
-        this.snackbar.text = "Wrong Credentials. Please, Try again!"
+        this.snackbar.text = err;
+        console.log(err);
+      }
+    },
+
+    validCredentials() {
+      if (this.password === this.confirmPassword) {
+        return true;
+      } else {
+        this.snackbar.open = true;
+        this.snackbar.color = "red";
+        this.snackbar.text = "Your password is not matched";
+        return false;
       }
     },
   },
@@ -99,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-.login_app {
+.register_app {
   display: flex;
   flex-direction: column;
 
@@ -109,7 +145,7 @@ export default {
   background-color: #f5f6fa;
 }
 
-.login__header {
+.register__header {
   color: #e85288;
   height: 120px;
   display: flex;
@@ -117,11 +153,11 @@ export default {
   margin: 0 60px;
 }
 
-.login__header span {
+.register__header span {
   color: #000;
 }
 
-.login__container {
+.register__container {
   display: flex;
 
   align-items: center;
@@ -131,11 +167,11 @@ export default {
   padding: 0 60px;
 }
 
-.login__container img {
+.register__container img {
   width: 50vw;
 }
 
-.login__container form {
+.register__container form {
   display: flex;
   flex-direction: column;
 
@@ -146,7 +182,7 @@ export default {
   text-align: center;
 }
 
-.login__container h1 {
+.register__container h1 {
   margin-bottom: 40px;
 }
 
@@ -157,13 +193,13 @@ export default {
   padding: 0 40px;
 }
 
-.login___btnSubmit {
+.register___btnSubmit {
   background-color: #e85288;
   width: 50%;
   border-radius: 20px;
 }
 
-.login__container a {
+.register__container a {
   color: #e85288;
 
   font-weight: bold;
@@ -171,12 +207,12 @@ export default {
   text-decoration: none;
 }
 
-.login__container span {
+.register__container span {
   color: #000000;
   font-weight: bold;
 }
 
-.login__container strong {
+.register__container strong {
   color: #e85288;
 }
 </style>
