@@ -33,7 +33,7 @@
           Login
         </v-btn>
 
-        <router-link to="">Forgot your password?</router-link>
+        <router-link to="/forgotPassword">Forgot your password?</router-link>
         <p>
           Don't have account?
           <router-link to="/signup">Sign Up here!</router-link>
@@ -84,7 +84,7 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        await axios.post("", {
+        await axios.post('', {
           email: this.email,
           password: this.password,
         });

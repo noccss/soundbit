@@ -5,6 +5,14 @@ Vue.use(Router);
 
 var routes = [
   {
+    path: "/",
+    name: "home",
+    meta: {
+      title: "Inicial"
+    },
+    component: () => import("./views/Home.vue")
+  },
+  {
     path: "/login",
     name: "login",
     meta: {
@@ -20,6 +28,14 @@ var routes = [
     },
     component: () => import("./views/auth/SignUp.vue"),
   },
+  {
+      path: "/forgotPassword",
+      name: "forgotPass",
+      meta: {
+          title: "Forgot password"
+      },
+      component: () => import("./views/auth/ForgotPass.vue"),
+  }
 ];
 
 Vue.prototype.allRoutes = routes;
