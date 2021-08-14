@@ -132,7 +132,7 @@ export default {
   name: "forgotPassword",
   data() {
     return {
-      step: 3,
+      step: 1,
       validatedEmail: false,
       email: "",
       password: "",
