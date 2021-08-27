@@ -22,22 +22,20 @@
         </v-stepper-header>
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-card class="mb-12">
-              <v-form ref="form" @submit.prevent="validateEmail">
-                <h1>Digite seu E-mail</h1>
+            <v-form ref="form" @submit.prevent="validateEmail">
+              <h1>Digite seu E-mail</h1>
 
-                <v-text-field
-                  class="mt-5"
-                  v-model="email"
-                  :rules="[rulesEmail.required, rulesEmail.email]"
-                  :append-icon="'mdi-email'"
-                  label="E-mail"
-                  required
-                  outlined
-                  name="email"
-                ></v-text-field>
-              </v-form>
-            </v-card>
+              <v-text-field
+                class="mt-5"
+                v-model="email"
+                :rules="[rulesEmail.required, rulesEmail.email]"
+                :append-icon="'mdi-email'"
+                label="E-mail"
+                required
+                outlined
+                name="email"
+              ></v-text-field>
+            </v-form>
             <v-btn
               class="forgotPass___btnSubmit"
               color="white"
@@ -48,78 +46,74 @@
             >
           </v-stepper-content>
           <v-stepper-content step="2">
-            <v-card class="mb-12">
-              <h1 class="mb-5">Confirme que é você mesmo!</h1>
+            <h1 class="mb-5">Confirme que é você mesmo!</h1>
 
-              <p>
-                Por favor, verifique para assegurarmos que realmente é você,
-                pedimos que verifique seu E-mail e clique no link que está no
-                corpo da mensagem
-              </p>
-              <p>
-                Caso a mensagem que enviamos para seu E-mail não esteja
-                aparecendo na caixa de entrada, verifique se está no spam
-              </p>
+            <p>
+              Por favor, verifique para assegurarmos que realmente é você,
+              pedimos que verifique seu E-mail e clique no link que está no
+              corpo da mensagem
+            </p>
+            <p>
+              Caso a mensagem que enviamos para seu E-mail não esteja aparecendo
+              na caixa de entrada, verifique se está no spam
+            </p>
 
-              <p>
-                Problemas para a visualização da mensagem, não se preocupe,
-                basta vir falar conosco que vamos te ajudar com isso, basta nos
-                enviar um E-mail, <a href="#">suporte@soundbit.com.br</a>
-              </p>
-            </v-card>
+            <p>
+              Problemas para a visualização da mensagem, não se preocupe, basta
+              vir falar conosco que vamos te ajudar com isso, basta nos enviar
+              um E-mail, <a href="#">suporte@soundbit.com.br</a>
+            </p>
           </v-stepper-content>
           <v-stepper-content step="3">
-            <v-card class="mb-12">
-              <h1 class="mb-5">Troque sua senha!</h1>
-              <v-form ref="form" @submit.prevent="handleSubmit">
-                <v-text-field
-                  v-model="password"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="showPassword ? 'text' : 'password'"
-                  :rules="[rulesPassword.required, rulesPassword.min]"
-                  label="Password"
-                  required
-                  outlined
-                  @click:append="showPassword = !showPassword"
-                ></v-text-field>
-                <v-text-field
-                  v-model="newPassword"
-                  :append-icon="showNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="showNewPassword ? 'text' : 'password'"
-                  :rules="[
-                    rulesPassword.required,
-                    rulesPassword.min,
-                    newPasswordDifferentRule,
-                  ]"
-                  label="New Password"
-                  required
-                  outlined
-                  @click:append="showNewPassword = !showNewPassword"
-                ></v-text-field>
-                <v-text-field
-                  v-model="confirmPassword"
-                  :append-icon="showConfirmPassowrd ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="showConfirmPassowrd ? 'text' : 'password'"
-                  :rules="[
-                    rulesPassword.confirmPassword,
-                    rulesPassword.min,
-                    newPasswordConfirmRule,
-                  ]"
-                  label="Confirm Password"
-                  required
-                  outlined
-                  @click:append="showConfirmPassowrd = !showConfirmPassowrd"
-                ></v-text-field>
-                <v-btn
-                  class="ma-2 forgotPass___btnSubmit"
-                  color="white"
-                  type="submit"
-                  outlined
-                  large
-                  >Trocar Senha</v-btn
-                >
-              </v-form>
-            </v-card>
+            <h1 class="mb-5">Troque sua senha!</h1>
+            <v-form ref="form" @submit.prevent="handleSubmit">
+              <v-text-field
+                v-model="password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showPassword ? 'text' : 'password'"
+                :rules="[rulesPassword.required, rulesPassword.min]"
+                label="Password"
+                required
+                outlined
+                @click:append="showPassword = !showPassword"
+              ></v-text-field>
+              <v-text-field
+                v-model="newPassword"
+                :append-icon="showNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showNewPassword ? 'text' : 'password'"
+                :rules="[
+                  rulesPassword.required,
+                  rulesPassword.min,
+                  newPasswordDifferentRule,
+                ]"
+                label="New Password"
+                required
+                outlined
+                @click:append="showNewPassword = !showNewPassword"
+              ></v-text-field>
+              <v-text-field
+                v-model="confirmPassword"
+                :append-icon="showConfirmPassowrd ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showConfirmPassowrd ? 'text' : 'password'"
+                :rules="[
+                  rulesPassword.confirmPassword,
+                  rulesPassword.min,
+                  newPasswordConfirmRule,
+                ]"
+                label="Confirm Password"
+                required
+                outlined
+                @click:append="showConfirmPassowrd = !showConfirmPassowrd"
+              ></v-text-field>
+              <v-btn
+                class="ma-2 forgotPass___btnSubmit"
+                color="white"
+                type="submit"
+                outlined
+                large
+                >Trocar Senha</v-btn
+              >
+            </v-form>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -157,13 +151,13 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        if(this.$refs.form.validate()) {
+        if (this.$refs.form.validate()) {
           await axios.post("", {
-            password: this.newPassword
-          })
+            password: this.newPassword,
+          });
         }
-      } catch(err) {
-        console.log(err)
+      } catch (err) {
+        console.log(err);
       }
     },
     validateEmail() {
@@ -225,6 +219,7 @@ export default {
 }
 
 .forgotPass__container h1 {
+  text-align: center;
   font-size: 24px;
 
   color: #e85288;
