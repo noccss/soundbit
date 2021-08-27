@@ -50,6 +50,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   list-style-type: none;
   width: 100%;
 
